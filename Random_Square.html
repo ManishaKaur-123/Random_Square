@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Moving Square</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+       
+        const square = document.createElement('div');
+        square.style.width = '50px';
+        square.style.height = '50px';
+        square.style.backgroundColor = 'red';
+        square.style.position = 'absolute';
+
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        // Generate random starting positions
+        let startX = Math.random() * windowWidth;
+        let startY = Math.random() * windowHeight;
+
+        // Move the square
+        function moveSquare() {
+            // Get the current position of the square
+            let currentPositionX = parseFloat(square.style.left) || 0;
+            let currentPositionY = parseFloat(square.style.top) || 0;
+
+        
+            let nextPositionY = currentPositionY + 5;
+
+            // when the square reaches the end of the window vertically
+            if (nextPositionY >= windowHeight) {
+                nextPositionY = 0;
+                // Move to a new line
+                startX = Math.random() * windowWidth;
+            }
+
+            // Update the position of the square
+            square.style.left = startX + 'px';
+            square.style.top = nextPositionY + 'px';
+        }
+
+        // Append the square to the document body
+        document.body.appendChild(square);
+
+        // Set the initial position of the square
+        square.style.left = startX + 'px';
+        square.style.top = startY + 'px';
+
+        
+        setInterval(moveSquare, 100);
+    </script>
+</body>
+
+</html>
